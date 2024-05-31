@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Point Table</title>
+</head>
+<style>
+    /* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #b2f7ef, #91e5f6);
+    color: #333333;
+}
+
+h1 {
+    text-align: center;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto;
+}
+
+th, td {
+    border: 1px solid #000;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+</style>
+<body>
+    <h1>Point Table</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Team Name</th>
+                <th>Total Games Played</th>
+                <th>Total Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for team in team_standings %}
+            <tr>
+                <td>{{ team.team_name }}</td>
+                <td>{{ team.total_games_played }}</td>
+                <td>{{ team.total_points }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

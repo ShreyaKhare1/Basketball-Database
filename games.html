@@ -1,0 +1,143 @@
+<!-- Form to add a new game -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #b2f7ef, #91e5f6);
+    color: #333333;
+}
+
+h2 {
+    text-align: center;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+form, table {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="number"],
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #28a745;
+    color: #ffffff;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+th, td {
+    border: 1px solid #000;
+    text-align: left;
+    padding: 12px;
+}
+
+th {
+    background: linear-gradient(to bottom right, #f2f2f2, #e6e6e6);
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #333333;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+    </style>
+</head>
+<body>
+    <h2>Add New Game</h2>
+<form method="POST" action="/games">
+    <!-- Input field for home team -->
+    <label for="home_team_id">Home Team:</label><br>
+    <select id="home_team_id" name="home_team_id">
+        {% for team in teams %}
+            <option value="{{ team.id }}">{{ team.name }}</option>
+        {% endfor %}
+    </select><br>
+    
+    <!-- Input field for away team -->
+    <label for="away_team_id">Away Team:</label><br>
+    <select id="away_team_id" name="away_team_id">
+        {% for team in teams %}
+            <option value="{{ team.id }}">{{ team.name }}</option>
+        {% endfor %}
+    </select><br>
+    
+    <!-- Input field for score margin -->
+    <label for="score_margin">Score Margin:</label><br>
+    <input type="number" id="score_margin" name="score_margin" required><br>
+    
+    <!-- Dropdown select field for choosing the winner -->
+    <label for="winner_id">Winner:</label><br>
+    <select id="winner_id" name="winner_id">
+        <option value="">Select Winner</option>
+        {% for team in teams %}
+            <option value="{{ team.id }}">{{ team.name }}</option>
+        {% endfor %}
+        <option value="Tie">Tie</option>
+    </select><br>
+    
+    <!-- Submit button -->
+    <input type="submit" value="Add Game">
+</form>
+<!-- Display existing games -->
+<h2>Existing Games</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Game ID</th>
+            <th>Home Team</th>
+            <th>Away Team</th>
+            <th>Winner</th>
+            <th>Score Margin</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for game in games %}
+        <tr>
+            <td>{{ game.game_id }}</td>
+            <td>{{ game.team_id_home}}</td>
+            <td>{{ game.team_id_visitor }}</td>
+            <td>{{ game.winner if game.winner else "Tie" }}</td>
+            <td>{{ game.score_margin }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    
+</body>
+</html>
+

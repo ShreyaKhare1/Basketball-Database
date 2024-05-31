@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teams</title>
+</head>
+<style>
+    /* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #b2f7ef, #91e5f6);
+    color: #333333;
+}
+
+h1 {
+    text-align: center;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #333333;
+    margin-top: 20px;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="submit"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #000;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+</style>
+<body>
+    <h1>Teams</h1>
+    
+    <!-- Form to add a new team -->
+    <h2>Add New Team</h2>
+    <form method="POST" action="/teams">
+        <label for="name">Team Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+        
+        <label for="city">City:</label><br>
+        <input type="text" id="city" name="city"><br>
+        
+        <label for="country">Year_founded:</label><br>
+        <input type="text" id="country" name="country"><br>
+        
+        
+        
+        <input type="submit" value="Add Team">
+    </form>
+
+    <!-- Display existing teams -->
+    <h2>Existing Teams</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Team Name</th>
+                <th>City</th>
+                <th>Year_founded</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for team in teams %}
+            <tr>
+                <td>{{ team.name }}</td>
+                <td>{{ team.city }}</td>
+                <td>{{ team.year_founded }}</td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
